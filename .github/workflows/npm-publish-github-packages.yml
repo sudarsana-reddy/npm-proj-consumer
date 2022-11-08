@@ -21,7 +21,7 @@ jobs:
       - run: npm i
       - name: Download npm-proj package using PAT
         run: |
-          npm pack @sudarsana-reddy/npm-proj
+          npm pack --registry=https://npm.pkg.github.com @sudarsana-reddy/npm-proj
           tar -xf *.tgz
           ls -ltr
           cd package
