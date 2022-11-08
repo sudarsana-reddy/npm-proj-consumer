@@ -24,5 +24,7 @@ jobs:
           npm pack @sudarsana-reddy/npm-proj
           tar -xf *.tgz
           ls -ltr
+          cd package
+          ls -ltr
         env:
           NODE_AUTH_TOKEN: ${{secrets.PAT}}
