@@ -14,7 +14,7 @@ fs.readFile(packagelock, "utf8", (err, data) => {
 
   const result = data.replace(
     /\"resolved\"\:\s\"git\+ssh:\/\/git\@github\.com\/sudarsana-reddy\/npm-proj\.git/g,
-    `"resolved": "git+https://${token}@github.com/sudarsana-reddy/npm-proj.git"`
+    `"resolved": "git+https://${token}@github.com/sudarsana-reddy/npm-proj.git`
   );
 
   fs.writeFile(packagelock, result, "utf8", (err) => {
