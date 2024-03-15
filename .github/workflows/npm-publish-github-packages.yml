@@ -23,10 +23,8 @@ jobs:
       - name: npm install
         run: |  
          
-  
-          git config --global url."https://${PAT}github.com/".insteadOf ssh://git@github.com/
-          git config --global url."https://${PAT}github.com/".insteadOf git@github.com:
-          git config --global url."https://".insteadOf ssh://
+          node script.js
+          cat package-lock.json
           npm i
         env: 
           PAT: ${{secrets.PAT}}
