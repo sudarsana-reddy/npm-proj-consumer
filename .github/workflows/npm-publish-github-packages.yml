@@ -19,10 +19,11 @@ jobs:
       #     node-version: 16
       #     registry-url: https://npm.pkg.github.com/
       - run: |
+          git config --global url."https://${PAT}@github.com/".insteadOf git://github:
           npm i
         env: 
           PAT: ${{secrets.PAT}}
-          NODE_AUTH_TOKEN: ${{secrets.PAT}}
+          
       # - name: Download npm-proj package using PAT
       #   run: |
       #     npm pack --registry=https://npm.pkg.github.com @sudarsana-reddy/npm-proj

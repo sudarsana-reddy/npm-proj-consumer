@@ -18,6 +18,6 @@
   },
   "homepage": "https://github.com/sudarsana-reddy/npm-proj-consumer#readme",
   "dependencies": {
-    "@sud/npm-proj": "git+https://github:$PAT@github.com/sudarsana-reddy/npm-proj.git"
+    "@sud/npm-proj": "github:sudarsana-reddy/npm-proj"
   }
 }
