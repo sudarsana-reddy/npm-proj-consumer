@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 // I keep this file in a scripts folder
-const packagelock = path.resolve(__dirname, "../package-lock.json");
+const packagelock = path.resolve(__dirname, "./package-lock.json");
 
 fs.readFile(packagelock, "utf8", (err, data) => {
   if (err) {
