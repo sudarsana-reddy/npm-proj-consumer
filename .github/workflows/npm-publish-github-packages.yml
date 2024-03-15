@@ -21,6 +21,7 @@ jobs:
       - name: npm install
         run: |    
           git config --global url."https://${PAT}@github.com/".insteadOf git://github:           
+          node script.js
           npm i
         env: 
           PAT: ${{secrets.PAT}}
