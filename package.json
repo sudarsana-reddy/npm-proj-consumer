@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/sudarsana-reddy/npm-proj-consumer/issues"
   },
-  "homepage": "https://github.com/sudarsana-reddy/npm-proj-consumer#readme"
+  "homepage": "https://github.com/sudarsana-reddy/npm-proj-consumer#readme",
+  "dependencies": {
+    "@sud/npm-proj": "github:sudarsana-reddy/npm-proj"
+  }
 }
