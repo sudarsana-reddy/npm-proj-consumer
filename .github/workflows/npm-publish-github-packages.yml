@@ -22,6 +22,7 @@ jobs:
           npm i
         env: 
           PAT: ${{secrets.PAT}}
+          NODE_AUTH_TOKEN: ${{secrets.PAT}}
       # - name: Download npm-proj package using PAT
       #   run: |
       #     npm pack --registry=https://npm.pkg.github.com @sudarsana-reddy/npm-proj
