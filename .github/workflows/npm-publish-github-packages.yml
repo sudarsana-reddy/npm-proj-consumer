@@ -18,7 +18,10 @@ jobs:
       #   with:
       #     node-version: 16
       #     registry-url: https://npm.pkg.github.com/
-      - run: npm i
+      - run: |
+          npm i
+        env: 
+          PAT: ${{secrets.PAT}}
       # - name: Download npm-proj package using PAT
       #   run: |
       #     npm pack --registry=https://npm.pkg.github.com @sudarsana-reddy/npm-proj
