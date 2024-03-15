@@ -20,8 +20,9 @@ jobs:
       #     registry-url: https://npm.pkg.github.com/
       - name: npm install
         run: |    
-          git config --global url."https://${PAT}@github.com/".insteadOf git://github:           
+          git config --global url."https://${PAT}@github.com/".insteadOf git://github:         
           node script.js
+          cat package-lock.json
           npm i
         env: 
           PAT: ${{secrets.PAT}}
