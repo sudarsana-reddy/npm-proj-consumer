@@ -14,17 +14,18 @@ jobs:
       packages: write
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-          registry-url: https://npm.pkg.github.com/
+      # - uses: actions/setup-node@v3
+      #   with:
+      #     node-version: 16
+      #     registry-url: https://npm.pkg.github.com/
       - run: npm i
-      - name: Download npm-proj package using PAT
-        run: |
-          npm pack --registry=https://npm.pkg.github.com @sudarsana-reddy/npm-proj
-          tar -xf *.tgz
-          ls -ltr
-          cd package
-          ls -ltr
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.PAT}}
+      # - name: Download npm-proj package using PAT
+      #   run: |
+      #     npm pack --registry=https://npm.pkg.github.com @sudarsana-reddy/npm-proj
+      #     tar -xf *.tgz
+      #     ls -ltr
+      #     cd package
+      #     ls -ltr
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{secrets.PAT}}
+      - run: node index.js
