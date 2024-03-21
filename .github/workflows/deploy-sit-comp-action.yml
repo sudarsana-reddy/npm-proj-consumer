@@ -1,4 +1,4 @@
-name: deploy-sit
+name: deploy-sit-composite-action
 
 on:
     workflow_dispatch: 
