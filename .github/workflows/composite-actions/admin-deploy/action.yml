@@ -15,7 +15,7 @@ runs:
 
     - name: dispaly instance name
       run: |
-       echo ${{ vars[ matrix.instances ]}}
+       echo ${{ inputs.tminstance }}
 
     - name: Deploy war1
       run: |   
