@@ -16,19 +16,24 @@ runs:
     - name: dispaly instance name
       run: |
        echo ${{ inputs.tminstance }}
+      shell: bash
 
     - name: Deploy war1
       run: |   
        echo "Deployed war1"
+      shell: bash
 
     - name: Deploy war2
       run: |   
         echo "Deployed war2"
+      shell: bash
 
     - name: Deploy war3
       run: |   
         echo "Deployed war3"
+      shell: bash
         
     - name: Deploy war4
       run: |   
         echo "Deployed war4"
+      shell: bash
