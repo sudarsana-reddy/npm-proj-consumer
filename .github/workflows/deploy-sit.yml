@@ -9,12 +9,16 @@ jobs:
         runs-on: ubuntu-latest
         strategy:
             matrix:
-                insances: [tminst1, tminst2]               
+                instances: [tminst1, tminst2]               
 
         steps:
             - uses: actions/checkout@v3
               with:
                 persist-credentials: false
+
+            - name: dispaly instance name
+              run: |
+                echo ${{ vars[ matrix.instances ]}}
 
             - name: Deploy war1
               run: |   
