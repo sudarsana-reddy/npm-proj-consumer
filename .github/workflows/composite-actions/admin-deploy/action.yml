@@ -27,8 +27,8 @@ runs:
 
     - name: Deploy war3
       run: |   
-        echo "Deployed war1"
-
+        echo "Deployed war3"
+        
     - name: Deploy war4
       run: |   
         echo "Deployed war4"
