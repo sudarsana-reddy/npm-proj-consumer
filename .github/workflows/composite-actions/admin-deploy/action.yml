@@ -1,0 +1,34 @@
+name: 'Deploy to Admin Portal'
+
+inputs:
+ tminstance:  # id of input
+  description: Environment name
+  required: true 
+
+    
+runs:
+  using: "composite"  
+  steps:
+    - uses: actions/checkout@v3
+      with:
+        persist-credentials: false
+
+    - name: dispaly instance name
+      run: |
+       echo ${{ vars[ matrix.instances ]}}
+
+    - name: Deploy war1
+      run: |   
+       echo "Deployed war1"
+
+    - name: Deploy war2
+      run: |   
+        echo "Deployed war2"
+
+    - name: Deploy war3
+      run: |   
+        echo "Deployed war1"
+
+    - name: Deploy war4
+      run: |   
+        echo "Deployed war4"
