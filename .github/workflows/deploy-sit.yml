@@ -5,60 +5,21 @@ on:
 
 jobs:
     deploy-sit-admin:
-        environment: SIT
-        runs-on: ubuntu-latest
         strategy:
             matrix:
-                instances: [tminst1, tminst2]               
-
-        steps:
-            - uses: actions/checkout@v3
-              with:
-                persist-credentials: false
-
-            - name: dispaly instance name
-              run: |
-                echo ${{ vars[ matrix.instances ]}}
-
-            - name: Deploy war1
-              run: |   
-                echo "Deployed war1"
-
-            - name: Deploy war2
-              run: |   
-                echo "Deployed war2"
-
-            - name: Deploy war3
-              run: |   
-                echo "Deployed war1"
-
-            - name: Deploy war4
-              run: |   
-                echo "Deployed war4"
+                instances: [tminst1, tminst2]
+        uses: ./.github/workflows/deploy-admin-reusable.yml
+        with:
+          ENVIRONMENT: SIT
+          TOMCAT_INSTANCE: ${{ matrix.instances }}        
+        secrets: inherit
 
     deploy-sit-customer:
-        environment: SIT
-        runs-on: ubuntu-latest
         strategy:
             matrix:
-                insances: [tminst1, tminst2]               
-
-        steps:
-            - uses: actions/checkout@v3
-              with:
-                persist-credentials: false
-
-            - name: Deploy war1
-              run: |   
-                echo "Deployed war1"
-
-            - name: Deploy war2
-              run: |   
-                echo "Deployed war2"
-
-            - name: Deploy war3
-              run: |   
-                echo "Deployed war3"
-
-           
-
+                instances: [tminst1, tminst2]
+        uses: ./.github/workflows/deploy-customer-reusable.yml
+        with:
+          ENVIRONMENT: SIT
+          TOMCAT_INSTANCE: ${{ matrix.instances }} 
+        secrets: inherit

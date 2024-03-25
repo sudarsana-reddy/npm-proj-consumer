@@ -1,0 +1,40 @@
+name: deploy-admin
+
+on:
+    workflow_call: 
+        inputs:
+            ENVIRONMENT:
+                description: environment
+                type: string
+                required: true
+            TOMCAT_INSTANCE:
+                description: Tomcat Instance
+                type: string
+                required: true
+
+jobs:
+    deploy-admin:
+        environment: ${{ inputs.ENVIRONMENT }}
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+              with:
+                persist-credentials: false
+
+            - name: dispaly instance name
+              run: |
+                echo ${{ inputs.TOMCAT_INSTANCE }}
+                echo ${{ vars[inputs.TOMCAT_INSTANCE] }}
+
+            - name: Deploy war1
+              run: |   
+                echo "Deployed war1"
+
+            - name: Deploy war2
+              run: |   
+                echo "Deployed war2"
+
+            - name: Deploy war3
+              run: |   
+                echo "Deployed war1"         
+        
