@@ -1,4 +1,4 @@
-name: deploy-admin
+name: deploy-customer
 
 on:
     workflow_call: 
