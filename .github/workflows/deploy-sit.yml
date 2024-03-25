@@ -7,7 +7,7 @@ jobs:
     deploy-sit-admin:
         strategy:
             matrix:
-                instances: [tminst1, tminst2]
+                instances: [SIT_ADMIN_TOMCAT1, SIT_ADMIN_TOMCAT2]
         uses: ./.github/workflows/deploy-admin-reusable.yml
         with:
           ENVIRONMENT: SIT
@@ -17,7 +17,7 @@ jobs:
     deploy-sit-customer:
         strategy:
             matrix:
-                instances: [tminst1, tminst2]
+                instances: [SIT_CUSTOMER_TOMCAT1, SIT_CUSTOMER_TOMCAT2]
         uses: ./.github/workflows/deploy-customer-reusable.yml
         with:
           ENVIRONMENT: SIT
