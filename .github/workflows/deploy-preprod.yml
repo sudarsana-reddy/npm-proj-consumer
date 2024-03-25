@@ -1,0 +1,25 @@
+name: deploy-sit
+
+on:
+    workflow_dispatch: 
+
+jobs:
+    deploy-sit-admin:
+        strategy:
+            matrix:
+                instances: [PREPROD_ADMIN1_TOMCAT1, PREPROD_ADMIN1_TOMCAT2, PREPROD_ADMIN2_TOMCAT1, PREPROD_ADMIN2_TOMCAT2]
+        uses: ./.github/workflows/deploy-admin-reusable.yml
+        with:
+          ENVIRONMENT: SIT
+          TOMCAT_INSTANCE: ${{ matrix.instances }}        
+        secrets: inherit
+
+    deploy-sit-customer:
+        strategy:
+            matrix:
+                instances: [PREPROD_CUSTOMER1_TOMCAT1, PREPROD_CUSTOMER1_TOMCAT2, PREPROD_CUSTOMER2_TOMCAT1, PREPROD_CUSTOMER2_TOMCAT2]
+        uses: ./.github/workflows/deploy-customer-reusable.yml
+        with:
+          ENVIRONMENT: SIT
+          TOMCAT_INSTANCE: ${{ matrix.instances }} 
+        secrets: inherit
