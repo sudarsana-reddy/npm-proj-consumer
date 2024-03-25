@@ -13,7 +13,7 @@ on:
                 required: true
 
 jobs:
-    deploy-admin:
+    deploy-customer:
         environment: ${{ inputs.ENVIRONMENT }}
         runs-on: ubuntu-latest
         steps:
