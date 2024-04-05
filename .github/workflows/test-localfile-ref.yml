@@ -1,0 +1,29 @@
+name: "Test NPM local reference"
+
+on:
+    workflow_dispatch:
+        inputs:
+            RELEASE_VERSION:
+                required: true
+                default: 1.0.0
+
+jobs:
+    execute:
+        runs-on: ubuntu-latest
+        steps:
+            - name: clone repo
+              uses: actions/checkout@v4
+
+            - name: download the dependency
+              run: |
+                curl -H "Authorization: Bearer ${{ secrets.PAT }}" -o ./lib/sud-npm-proj-${{ inputs.RELEASE_VERSION}}.tgz https://github.com/sudarsana-reddy/npm-empty-proj/releases/download/V${{ inputs.RELEASE_VERSION}}/sud-npm-proj-${{ inputs.RELEASE_VERSION}}.tgz
+
+            - name: npm install
+              run: |
+                npm install
+
+            - name: Run code
+              run: |
+                node index.js
+            
+            
