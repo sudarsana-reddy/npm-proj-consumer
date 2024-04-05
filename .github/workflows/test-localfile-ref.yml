@@ -24,7 +24,7 @@ jobs:
 
             - name: download the dependency
               run: |
-                curl -H "Authorization: Bearer ${{ secrets.PAT }}" -o lib/sud-npm-proj-${{ inputs.RELEASE_VERSION}}.tgz https://github.com/sudarsana-reddy/npm-empty-proj/releases/download/V${{ inputs.RELEASE_VERSION}}/sud-npm-proj-${{ inputs.RELEASE_VERSION}}.tgz
+                curl -H "Authorization: Bearer ${{ secrets.PAT }}" -o ./sud-npm-proj-${{ inputs.RELEASE_VERSION}}.tgz https://github.com/sudarsana-reddy/npm-empty-proj/releases/download/V${{ inputs.RELEASE_VERSION}}/sud-npm-proj-${{ inputs.RELEASE_VERSION}}.tgz
 
             - name: npm install
               run: |
