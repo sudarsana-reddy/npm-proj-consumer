@@ -1,11 +1,10 @@
 name: Release Download Asset
 
 on:
-  workflow_dispatch:  
-       
+  workflow_dispatch:        
 
 jobs:
-  download:
+  execute:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
