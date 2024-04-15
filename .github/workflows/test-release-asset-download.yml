@@ -12,15 +12,17 @@ jobs:
 
       - name: Download Releae file
         run: |        
-          echo Trying to get the json response
+          echo Trying to get the release assets 
           response=$(curl -L "https://api.github.com/repos/sudarsana-reddy/npm-empty-proj/releases/tags/$RELEASE_VERSION" -H "Authorization: Bearer $PAT" )
           echo "*****************************************"
-          echo "$response"
+          echo "Extracting the asset URL"
           url=$(echo "$response" | jq .assets | jq '.[] | select(.name=="abcd.zip") | .url')
           echo "$url"
+          echo "Sanitizing URL"
           asset_url=$(echo $url | tr -d '"')
           echo "$asset_url"
           echo  "***************************************"
+          echo "Downloading Release Asset"
           curl -o ./"$SDK_FILE_NAME" -w "%{http_code}" -H "Authorization: Bearer $PAT" -H "Accept: application/octet-stream" -L "$asset_url"
         shell: bash
         env:
@@ -30,7 +32,5 @@ jobs:
 
       - name: Check the download
         run: |
-            ls -ltr
-
-            
+            ls -ltr          
     
