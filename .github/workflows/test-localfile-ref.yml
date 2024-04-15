@@ -24,7 +24,7 @@ jobs:
                 ls -ltr
                 cd lib
                 ls -ltr
-                curl -L -H "Authorization: Bearer ${{ secrets.PAT }}" -o ${{vars.DEPENDENCY_URL}}
+                curl -L -H "Authorization: Bearer ${{ secrets.PAT }}" -o GET ${{vars.DEPENDENCY_URL}}
                 ls -ltr
 
             - name: npm install
