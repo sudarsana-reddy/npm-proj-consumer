@@ -15,9 +15,6 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install dependencies
-        run: npm install @actions/github
-
       - name: Download Release Asset
         id: download
         uses: actions/github-script@v7
