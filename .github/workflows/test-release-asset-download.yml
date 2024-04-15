@@ -31,16 +31,16 @@ jobs:
             const octokit = new Octokit();
 
             const { data: release } = await octokit.repos.getReleaseByTag({
-              owner: 'owner',
-              repo: 'repository',
+              owner: 'sudarsana-reddy',
+              repo: ${{vars.RELEASE_REPO_NAME}},
               tag: ${{ vars.RELEASE_VERSION }} // Replace with your release tag
             });
 
-            const asset = release.assets.find(asset => asset.name ===  ${{ vars.RELEASE_ASSET_NAME }}); // Replace with your asset name
+            const asset = release.assets.find(asset => asset.name ===  ${{ vars.RELEASE_ASSET_NAME }}); 
 
             const response = await octokit.repos.downloadReleaseAsset({
-              owner: 'owner',
-              repo: 'repository',
+              owner: 'sudarsana-reddy',
+              repo: ${{vars.RELEASE_REPO_NAME}},
               asset_id: asset.id,
               headers: {
                 'Accept': 'application/octet-stream'
@@ -48,6 +48,10 @@ jobs:
             });
 
             fs.writeFileSync(${{ vars.RELEASE_ASSET_NAME }}, Buffer.from(response.data));
+
+      - name: Check the download
+        run: |
+            ls -ltr
 
             
     
