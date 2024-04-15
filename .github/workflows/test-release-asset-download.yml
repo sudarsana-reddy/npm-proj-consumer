@@ -1,0 +1,53 @@
+name: Release Download Asset
+
+on:
+  workflow_dispatch:  
+       
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install @actions/github
+
+      - name: Download Release Asset
+        id: download
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.PAT }}
+          script: |
+            const fs = require('fs');
+            const { Octokit } = require('@octokit/rest');
+
+            const octokit = new Octokit();
+
+            const { data: release } = await octokit.repos.getReleaseByTag({
+              owner: 'owner',
+              repo: 'repository',
+              tag: ${{ vars.RELEASE_VERSION }} // Replace with your release tag
+            });
+
+            const asset = release.assets.find(asset => asset.name ===  ${{ vars.RELEASE_ASSET_NAME }}); // Replace with your asset name
+
+            const response = await octokit.repos.downloadReleaseAsset({
+              owner: 'owner',
+              repo: 'repository',
+              asset_id: asset.id,
+              headers: {
+                'Accept': 'application/octet-stream'
+              }
+            });
+
+            fs.writeFileSync(${{ vars.RELEASE_ASSET_NAME }}, Buffer.from(response.data));
+
+            
+    
