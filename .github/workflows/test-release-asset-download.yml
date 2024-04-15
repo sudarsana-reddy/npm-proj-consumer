@@ -10,40 +10,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-
-      - name: Download Release Asset
-        id: download
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.PAT }}
-          script: |
-            const fs = require('fs');
-            const { Octokit } = require('@octokit/rest');
-
-            const octokit = new Octokit();
-
-            const { data: release } = await octokit.repos.getReleaseByTag({
-              owner: 'sudarsana-reddy',
-              repo: ${{vars.RELEASE_REPO_NAME}},
-              tag: ${{ vars.RELEASE_VERSION }} // Replace with your release tag
-            });
-
-            const asset = release.assets.find(asset => asset.name ===  ${{ vars.RELEASE_ASSET_NAME }}); 
-
-            const response = await octokit.repos.downloadReleaseAsset({
-              owner: 'sudarsana-reddy',
-              repo: ${{vars.RELEASE_REPO_NAME}},
-              asset_id: asset.id,
-              headers: {
-                'Accept': 'application/octet-stream'
-              }
-            });
-
-            fs.writeFileSync(${{ vars.RELEASE_ASSET_NAME }}, Buffer.from(response.data));
+      - name: Download Releae file
+        run: |        
+          echo Trying to get the json response
+          response=$(curl -L "https://api.github.com/repos/sudarsana-reddy/npm-empty-proj/releases/tags/$RELEASE_VERSION" -H "Authorization: Bearer $PAT" )
+          echo "*****************************************"
+          echo "$response"
+          url=$(echo "$response" | jq .assets | jq '.[] | select(.name=="abcd.zip") | .url')
+          echo "$url"
+          asset_url=$(echo $url | tr -d '"')
+          echo "$asset_url"
+          echo  "***************************************"
+          curl -o ./"$SDK_FILE_NAME" -w "%{http_code}" -H "Authorization: Bearer $PAT" -H "Accept: application/octet-stream" -L "$asset_url"
+        shell: bash
+        env:
+          RELEASE_VERSION : ${{vars.RELEASE_VERSION}}
+          SDK_FILE_NAME: ${{vars.SDK_FILE_NAME}}
+          PAT: ${{secrets.PAT}}
 
       - name: Check the download
         run: |
