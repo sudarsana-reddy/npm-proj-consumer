@@ -16,7 +16,7 @@ jobs:
           response=$(curl -L "https://api.github.com/repos/sudarsana-reddy/npm-empty-proj/releases/tags/$RELEASE_VERSION" -H "Authorization: Bearer $PAT" )
           echo "*****************************************"
           echo "Extracting the asset URL"
-          url=$(echo "$response" | jq .assets | jq '.[] | select(.name=="$SDK_FILE_NAME") | .url')
+          url=$(echo "$response" | jq .assets | jq --arg SDK_FILE_NAME "SDK_FILE_NAME" '.[] | select(.name == $SDK_FILE_NAME) | .url')
           echo "$url"
           echo "Sanitizing URL"
           asset_url=$(echo $url | tr -d '"')
