@@ -39,6 +39,7 @@ jobs:
           echo "Downlaoding the sdk"
           echo "********************************************"
           curl -o ./"$SDK_FILE_NAME" -w "%{http_code}" -H "Authorization: Bearer $PAT" -H "Accept: application/octet-stream" -L "$asset_url"
+           echo "********************************************"
           echo "Download completed successfully"
           echo "********************************************"
         shell: bash
