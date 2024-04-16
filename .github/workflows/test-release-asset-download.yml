@@ -25,9 +25,11 @@ jobs:
           RELEASE_VERSION="v$VERSION"
           echo "$RELEASE_VERSION"  
           echo "********************************************"
-          echo Trying to get the json response
+          echo Trying to get the release assets by tag name
           echo "********************************************"
-          response=$(curl -L "$SDK_RELEASE_REPO/releases/tags/$RELEASE_VERSION" -H "Authorization: Bearer $PAT" )
+          releaseurl="$SDK_RELEASE_REPO/releases/tags/$RELEASE_VERSION"
+          echo "release url: $releaseurl"
+          response=$(curl -L "$releaseurl" -H "Authorization: Bearer $PAT" )
           echo "*****************************************"
           echo "$response"
           url=$(echo "$response" | jq .assets  | jq --arg SDK_FILE_NAME "$SDK_FILE_NAME" '.[] | select(.name == $SDK_FILE_NAME) | .url')
