@@ -27,7 +27,7 @@ jobs:
           echo "********************************************"
           echo Trying to get the json response
           echo "********************************************"
-          response=$(curl -L "https://api.github.com/repos/sudarsana-reddy/npm-empty-proj/releases/tags/$RELEASE_VERSION" -H "Authorization: Bearer $PAT" )
+          response=$(curl -L "$SDK_RELEASE_REPO/releases/tags/$RELEASE_VERSION" -H "Authorization: Bearer $PAT" )
           echo "*****************************************"
           echo "$response"
           url=$(echo "$response" | jq .assets  | jq --arg SDK_FILE_NAME "$SDK_FILE_NAME" '.[] | select(.name == $SDK_FILE_NAME) | .url')
@@ -42,7 +42,8 @@ jobs:
           echo "********************************************"
         shell: bash
         env:         
-          PACKAGE_SCOPE_NAME: ${{vars.PACKAGE_SCOPE_NAME}}         
+          PACKAGE_SCOPE_NAME: ${{vars.PACKAGE_SCOPE_NAME}}  
+          SDK_RELEASE_REPO: ${{vars.SDK_RELEASE_REPO}}
           PAT: ${{secrets.PAT}}
 
       - name: Check the download
