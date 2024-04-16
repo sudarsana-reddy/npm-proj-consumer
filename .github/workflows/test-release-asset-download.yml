@@ -10,10 +10,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Download Releae file
-        run: sh ./download-here-sdk.sh          
-        shell: bash
+      - name: Checkout Downlaod Release Asset Action
+        run: |
+          git clone https://${{ secrets.PAT }}@github.com/sudarsana-reddy/download-release-asset.git
+                  
+      - name: Download Release file
+        uses: ./download-release-asset
         env:         
           PACKAGE_SCOPE_NAME: ${{vars.PACKAGE_SCOPE_NAME}}  
           SDK_RELEASE_REPO: ${{vars.SDK_RELEASE_REPO}}
           PAT: ${{secrets.PAT}}
+
+      - name: Check File System
+        run: ls -ltr         
+        shell: bash
+        
